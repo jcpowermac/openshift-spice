@@ -8,7 +8,7 @@ Run your Linux GUI apps remotely in OpenShift using [Spice](https://www.spice-sp
 Deploy the template
 
 ```
-oc create -f
+oc create -f https://raw.githubusercontent.com/jcpowermac/openshift-spice/master/openshift-template.yaml
 oc new-app --template spice-remoting-apps
 ```
 
