@@ -1,0 +1,10 @@
+FROM spice-base:latest
+
+USER root
+
+RUN dnf install -y firefox && \
+    dnf group install lxde-desktop -y
+
+USER 10001
+
+CMD run /usr/bin/startlxde

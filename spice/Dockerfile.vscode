@@ -1,0 +1,8 @@
+FROM spice-base:latest
+
+USER root
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
+    dnf install -y code
+
+USER 10001
+CMD run /usr/bin/code -w

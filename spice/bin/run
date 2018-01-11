@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -x
+
+export DISPLAY=:2
+#echo "localhost" > /etc/localhost
+
+echo "Running systemd-machine-id-setup"
+systemd-machine-id-setup
+#/usr/sbin/squid -f /etc/squid/squid.conf -N & &>/dev/null
+/usr/local/bin/chisel server & &>/dev/null
+echo "Starting Xorg"
+/usr/bin/Xorg -noreset -config spiceqxl.xorg.conf -logfile .Xorg.2.log :2 & 2>/dev/null
+echo "sleep 10..."
+sleep 10
+
+DISPLAY=:2 $@
+echo "Exiting..."
