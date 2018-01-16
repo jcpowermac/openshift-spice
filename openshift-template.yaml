@@ -54,15 +54,8 @@ objects:
           ports:
           - containerPort: 8080
             protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
         dnsPolicy: ClusterFirst
         restartPolicy: Always
-        schedulerName: default-scheduler
-        securityContext: {}
-        terminationGracePeriodSeconds: 30
-    test: false
     triggers:
     - type: ConfigChange
     - imageChangeParams:
@@ -110,8 +103,6 @@ objects:
       to:
         kind: ImageStreamTag
         name: vscode:latest
-    postCommit: {}
-    resources: {}
     runPolicy: Serial
     source:
       git:
@@ -137,51 +128,17 @@ objects:
     - from:
         kind: DockerImage
         name: docker.io/fedora:27
-      generation: 2
-      importPolicy: {}
       name: "27"
-      referencePolicy:
-        type: Source
 
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    labels:
-      build: spice-base
     name: spice-base
-  spec:
-    lookupPolicy:
-      local: false
-    tags:
-    - annotations: null
-      from:
-        kind: ImageStreamTag
-        name: spice-base:latest
-      generation: null
-      importPolicy: {}
-      name: latest
-      referencePolicy:
-        type: ""
 
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    creationTimestamp: null
-    generation: 1
     name: vscode
-  spec:
-    lookupPolicy:
-      local: false
-    tags:
-    - annotations: null
-      from:
-        kind: ImageStreamTag
-        name: vscode:latest
-      generation: null
-      importPolicy: {}
-      name: latest
-      referencePolicy:
-        type: ""
 
 - apiVersion: v1
   kind: Route
